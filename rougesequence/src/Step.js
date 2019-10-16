@@ -1,4 +1,4 @@
-imprt React, { useContext } from 'react';
+import React, { useContext } from 'react';
 import style, { keyframes, css } from 'styled-components';
 import StepContext from './StepContext';
 
