@@ -6,9 +6,9 @@ import useStart from './useStart';
 import StepContext from './StepContext';
 import Transport from './Transport';
 import StepSequencer from './StepSequencer';
-import Fx from './FX';
+import oneShot from './oneShot';
 
-const Container = styled.div`
+const Container = style.div`
     max-width: 900px;
     margin: auto;
     background: linear-gradient(to bottom right, #222, #0a0a0a);
@@ -19,7 +19,7 @@ const Container = styled.div`
     flex-direction: column;
     `;
 
-const ButtonCont = styled.div`
+const ButtonCont = style.div`
     flex: 1;
     flex-direction; row;
     align-items; stretch;
@@ -89,5 +89,49 @@ export default function TheMachine() {
         [config]
     );
 
-    useEffect
+    useEffect(
+        () => {
+            Tone.Transport.bpm.value = bpm;
+        },
+        [bpm]
+    );
+
+    useEffect(
+        () => {
+            if (start) {
+                Tone.Transport.start();
+            } else {
+                Tone.Transport.stop();
+                setCurrentStepState(0);
+            }
+        },
+        [start]
+    );
+//line 127 is where I start inserting my one shot "effects"
+    return (
+        <StepContext.Provider value={{ state: stepState, setSteps}}>
+            <Container>
+                <Transport>
+                    <Logo>Rouge Sequnencer</Logo>
+                    {bpmSelector}
+                    {startButton}
+                </Transport>
+                <React.Suspense fallback={<p>Doing magic things</p>}>
+                    <StepSequencer
+                        config={config}
+                        currentStep={currentStepRef.current}
+                        playing={start}
+                        setBuffers={setBuffers}
+                        />
+                <ButtonCont>
+                    <oneShot sound=""/>
+                    <oneShot sound=""/>
+                    <oneShot sound=""/>
+                    <oneShot sound=""/>
+                </ButtonCont>
+                </React.Suspense>
+            </Container>
+        </StepContext.Provider>
+    );
+    
 }
