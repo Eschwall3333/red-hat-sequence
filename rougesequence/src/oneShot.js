@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import style from 'styled-components';
 import { bufferResource } from './bufferResource';
 
 const Button = style.button`
-    background: ${props => (prop.held ? '#fd7272' : 'none')};
+    background: ${props => (props.held ? '#fd7272' : 'none')};
     flex: 1;
     border: 2px solid #fd7272;
     color: ${props => (props.held ? 'black' : '#fd7272')};
@@ -19,7 +19,7 @@ const Button = style.button`
     }
 `;
 
-export default function oneShot({ sound, title}) {
+export default function OneShot({ sound, title}) {
     let [held, setHeld] = useState(false);
     let buffer = bufferResource.read(sound);
     buffer.volume.value = -7;

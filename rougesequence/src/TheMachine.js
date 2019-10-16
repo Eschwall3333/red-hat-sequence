@@ -6,7 +6,7 @@ import useStart from './useStart';
 import StepContext from './StepContext';
 import Transport from './Transport';
 import StepSequencer from './StepSequencer';
-import oneShot from './oneShot';
+import OneShot from './OneShot';
 
 const Container = style.div`
     max-width: 900px;
@@ -18,6 +18,18 @@ const Container = style.div`
     display: flex;
     flex-direction: column;
     `;
+
+
+
+const Logo = style.div`
+    font-size: 30px;
+    color: #25ccf7;
+    font-family: 'Righteous', cursive;
+    padding: 15px;
+    margin: 0;
+    text-transform: uppercase;
+    display: inline-block;
+`;
 
 const ButtonCont = style.div`
     flex: 1;
@@ -124,10 +136,10 @@ export default function TheMachine() {
                         setBuffers={setBuffers}
                         />
                 <ButtonCont>
-                    <oneShot sound=""/>
-                    <oneShot sound=""/>
-                    <oneShot sound=""/>
-                    <oneShot sound=""/>
+                    <OneShot sound=""/>
+                    <OneShot sound=""/>
+                    <OneShot sound=""/>
+                    <OneShot sound=""/>
                 </ButtonCont>
                 </React.Suspense>
             </Container>
